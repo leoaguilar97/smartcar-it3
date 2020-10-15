@@ -2,7 +2,7 @@
 
 Final Project
 
-# FOOTPRINT
+# BLUEPRINT
 We need to create a car so we need materials for this, a list of the complete materials that were used in this project is shown above:
 
 * Car chassis (We had this one: http://www.geekbotelectronics.com/producto/kit-chasis-carro-robot-4wd/) and wheels.
