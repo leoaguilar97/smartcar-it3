@@ -1,7 +1,5 @@
-#include <Wire.h>
-
-#define echoUltraSonicFront A12
-#define triggerUltraSonicFront A13
+#define echoUltraSonicFront A14
+#define triggerUltraSonicFront A12
 
 long duration = 0;
 
@@ -20,14 +18,9 @@ long check_distance() {
 
 #include "motors.h"
 
-void sendEvent(int count) { return; }
+//void sendEvent(int count) { return; }
 
-char enabled = 0; // 0 inactivo //1 activo
-
-void receiveEvent (int count) {
-  while (!Wire.available()) {}
-  enabled = Wire.read();
-}
+char enabled = 1; // 0 inactivo //1 activo
 
 void setup() {
   Serial.begin(115200);
@@ -37,10 +30,6 @@ void setup() {
   pinMode(triggerUltraSonicFront, OUTPUT);
 
   randomSeed(analogRead(A15));
-  
-  Wire.begin(8);
-  Wire.onReceive(receiveEvent);
-  Wire.onRequest(sendEvent);
 }
 
 boolean started = false;
@@ -48,16 +37,17 @@ boolean started = false;
 void loop() {
   if (enabled) {
     if (!started) {
-      forward();
+      //forward();
       started = true;
     }
-
+    //Serial.println("INICIO");
     run_car();
   }
   else if (started) {
     stop_motors();
     started = false;
   }
-
+  //Serial.print("Distancia: ");
+  //Serial.println(String(check_distance()));
   delay(10);
 }

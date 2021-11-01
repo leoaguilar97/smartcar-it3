@@ -5,10 +5,10 @@
 #define max_speed 120
 
 //variables para el uso de motores
-AF_DCMotor motor_L1(1, MOTOR12_8KHZ); //motor IZQUIERDA FRONTAL
-AF_DCMotor motor_R1(4, MOTOR34_8KHZ); //motor DERECHA FRONTAL
-AF_DCMotor motor_L2(2, MOTOR12_8KHZ); //motor IZQUIERDO TRASERO
-AF_DCMotor motor_R2(3, MOTOR34_8KHZ); //motor DERECHA TRASERA
+AF_DCMotor motor_R1(1, MOTOR12_8KHZ); //motor IZQUIERDA FRONTAL
+AF_DCMotor motor_L1(4, MOTOR34_8KHZ); //motor DERECHA FRONTAL
+AF_DCMotor motor_R2(2, MOTOR12_8KHZ); //motor IZQUIERDO TRASERO
+AF_DCMotor motor_L2(3, MOTOR34_8KHZ); //motor DERECHA TRASERA
 
 // #1 -> FRONTAL
 // #2 -> TRASERO
@@ -108,7 +108,43 @@ void check_obstacles() {
   }
 }
 
+void start_motors(){
+  
+  motor_R1.setSpeed(fwd_speed);
+  motor_R2.setSpeed(fwd_speed);
+  motor_L1.setSpeed(fwd_speed);
+  motor_L2.setSpeed(fwd_speed);
+}
+
+
+void testMotors(){
+
+  stop_motors();
+  start_motors();
+  motor_R1.run(R1F);
+  Serial.println("DERECHA FRONTAL");
+  delay(5000);
+  stop_motors();
+  start_motors();
+  motor_R2.run(R2F);
+  Serial.println("DERECHA TRASERO");
+  delay(5000);
+  stop_motors();
+  start_motors();
+  motor_L1.run(L1F);
+  Serial.println("IZQUIERDA FRONTAL");
+  delay(5000);
+  stop_motors();
+  start_motors();
+  motor_L2.run(L2F);
+  Serial.println("IZQUIERDA TRASERO");
+  
+  delay(5000);
+  stop_motors();  
+}
+
 // funcion que dirige para ir al punto de entrega
 void run_car() {
   check_obstacles();
+  //testMotors();
 }
